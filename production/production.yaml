@@ -1,0 +1,33 @@
+hosts:
+ - name: "x.x.x.x"
+   user: "root"
+   password: "xxxxxx"
+ - name: "x.x.x.x"
+   user: "root"
+   password: "xxxxxx"
+
+dependencies:
+  install:
+    - apache2
+    - php5
+    - libapache2-mod-php5
+  uninstall:
+
+files:
+ - local: "./production/index.php"
+   name: "index.php"
+   path: "/var/www/html/"
+   owner: "root"
+   group: "root"
+   chmod: "644"
+
+ - local: "./production/000-default.conf"
+   name: "000-default.conf"
+   path: "/etc/apache2/sites-available/"
+   owner: "root"
+   group: "root"
+   chmod: "644"
+
+service:
+  start: "/etc/init.d/apache2 start"
+  stop: "/etc/init.d/apache2 stop"
